@@ -467,7 +467,7 @@ norm.nearey <- function(vowels, formant.int = FALSE, use.f3 = FALSE, all.mean = 
 		}
 	}
 	attr(return.vals, "norm.method")<-"Nearey"
-	if (!formant.int) {
+	if (formant.int) {
 		attr(return.vals, "norm.variant")<-"Nearey1"
 	} else {
 		attr(return.vals, "norm.variant")<-"Nearey2"
