@@ -1,5 +1,5 @@
 #####################
-# VOWELS v. 1.0
+# VOWELS v. 1.0-2
 # Vowel Manipulation, Normalization, and Plotting Package for R
 # Tyler Kendall, tsk3@duke.edu, 2009
 # cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/
@@ -244,8 +244,10 @@ convert.erb <- function(vowels) {
 norm.bark <- function(vowels) {
 	# convert formant mean values to Bark
  	bvowels<-convert.bark(vowels)
-  	if (attributes(vowels)$unit.type=="Bark") {
-  		bvowels<-vowels
+ 	if (!is.null(attributes(vowels)$unit.type)) {
+	  	if (attributes(vowels)$unit.type=="Bark") {
+  			bvowels<-vowels
+  		}
   	}
 	z1s<-bvowels[,4]
 	z2s<-bvowels[,5]
@@ -642,7 +644,7 @@ setup.axes <- function(vowels) {
   c(xstart, xend, ystart, yend, xunit, yunit)
 }
 
-vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape="speakers", shape.choice = NA, size = NA, labels = "none", leg="speakers", a.size = NA, l.size = NA, title = "", subtitle = NA) {
+vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape="speakers", shape.choice = NA, size = NA, labels = "none", leg="speakers", a.size = NA, l.size = NA, title = "", subtitle = NA, xlim = NA, ylim = NA) {
   
   ltext<-NA
   nmethod<-"non-"
@@ -683,6 +685,10 @@ vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape
   }
   
   axes <- setup.axes(vowels)
+  # override computation of axes limits if user specified both
+  if (!is.na(xlim[1]) & !is.na(ylim[1])) {
+  	axes <- c(xlim[1], xlim[2], ylim[1], ylim[2], (xlim[2]-xlim[1])/12, (ylim[2]-ylim[1])/12)
+  }
   pl.c <- setup.point.color(vowels, color, color.choice)
   pl.p <- setup.point.shape(vowels, shape, shape.choice)
   szs <- setup.sizes(vowels, size, a.size, l.size)
@@ -724,7 +730,7 @@ vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape
   options(warn=0)
 }
 
-add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="speakers", size = NA, labels = "none") {
+add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, labels = "none") {
   
   ltext<-NA
   if (!is.na(speaker)) {
@@ -744,7 +750,7 @@ add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="
   spkrs<-as.character(unique(vowels[,1]))
   
   pl.c <- setup.point.color(vowels, color, color.choice)
-  pl.p <- setup.point.shape(vowels, shape)
+  pl.p <- setup.point.shape(vowels, shape, shape.choice)
   szs <- setup.sizes(vowels, size)
   p.s <- szs[1]
   a.s <- szs[2]
@@ -769,7 +775,7 @@ add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="
   options(warn=0)
 }
 
-add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, speaker=NA, color=NA, color.choice=NA, shape="speakers", size = NA, leg=FALSE, labels = "none") {
+add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, leg=FALSE, labels = "none") {
   if (!is.numeric(sd.mult)) { sd.mult<-as.numeric(sd.mult) }
 
   if (!is.na(speaker)) {
@@ -796,15 +802,24 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, speaker=N
   }
   
   pl.c <- setup.point.color(vmns, color, color.choice)
-  pl.p <- setup.point.shape(vmns, shape)
+  pl.p <- setup.point.shape(vmns, shape, shape.choice)
   szs <- setup.sizes(vmns, size)
   p.s <- szs[1]+0.5
   a.s <- szs[2]
   l.s <- szs[3]
   
-  if (mean.points) points(vmns[,5], vmns[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
-  arrows(vmns[,5]-(sd.mult*vsds[,5]), vmns[,4], vmns[,5]+(sd.mult*vsds[,5]), vmns[,4], length=0.1, angle=90, code=3, lty=2, col=pl.c)
-  arrows(vmns[,5], vmns[,4]-(sd.mult*vsds[,4]), vmns[,5], vmns[,4]+(sd.mult*vsds[,4]), length=0.1, angle=90, code=3, lty=2, col=pl.c)
+  if (ellipsis) {
+   	t <- seq (0,7,.001)
+   	for (v in 1:length(vmns[,5])) {
+		x <- vmns[v,5] + ((sd.mult*vsds[v,5])*cos(t))
+		y <- vmns[v,4] + ((sd.mult*vsds[v,4])*sin(t))
+		lines(x, y, lty=2, col=pl.c[v])
+	}
+  } else {
+	  if (mean.points) points(vmns[,5], vmns[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
+  	arrows(vmns[,5]-(sd.mult*vsds[,5]), vmns[,4], vmns[,5]+(sd.mult*vsds[,5]), vmns[,4], length=0.1, angle=90, code=3, lty=2, col=pl.c)
+ 	arrows(vmns[,5], vmns[,4]-(sd.mult*vsds[,4]), vmns[,5], vmns[,4]+(sd.mult*vsds[,4]), length=0.1, angle=90, code=3, lty=2, col=pl.c)
+  }
   if (leg) legend("bottomright", legend=paste(sd.mult, " SDs", sep=""), lty=2, cex=0.8, inset=.02)
   options(warn=-1) # suppressing warnings here 
   if (!is.na(ltext)) {

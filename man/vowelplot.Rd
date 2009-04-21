@@ -13,14 +13,17 @@
 }
 \usage{
 vowelplot(vowels, speaker=NA, color=NA, color.choice=NA, 
-shape="speakers", shape.choice=NA, size=NA, labels="none", leg="speakers", a.size=NA, l.size=NA, title="", subtitle=NA)
+shape="speakers", shape.choice=NA, size=NA, labels="none", 
+leg="speakers", a.size=NA, l.size=NA, title="", subtitle=NA, 
+xlim=NA, ylim=NA)
 
 add.vowelplot(vowels, speaker=NA, color=NA, color.choice=NA, 
-shape="speakers", size=NA, labels="none")
+shape="speakers", shape.choice=NA, size=NA, labels="none")
 
 add.spread.vowelplot(vowels, mean.points=FALSE, sd.mult=2, 
-speaker=NA, color=NA, color.choice=NA, shape="speakers", 
-size = NA, leg=FALSE, labels="none")
+ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, 
+shape="speakers", shape.choice=NA, size = NA, leg=FALSE,
+labels="none")
 
 setup.axes(vowels)
 setup.point.color(vowels, color=NA, color.choice=NA)
@@ -42,18 +45,23 @@ setup.sizes(vowels, size=NA, a.size=NA, l.size=NA)
   \item{leg}{ Include a legend in the vowel plot?  If so, for speakers or vowels?  If NA, do not generate a legend. Default is "speakers" for vowelplot().  For add.spread.vowelplot() this is a boolean, defaulting to FALSE, which shows the number of standard deviations depicted by the bars. }
   \item{title}{ Include a custom main title for the plot?  If blank (""), will generate a title based on the data submitted to the function. }
   \item{subtitle}{ Include a custom subtitle (smaller font title at the bottom) for the plot?  If NA, and the vowel data has attributes of "norm.variant" or "unit.type"!="Hertz", the subtitle will default to those values (in that order).  Set to blank (""), to have no subtitle, otherwise prints whatever user specifies. }
+  \item{xlim}{ Specify with a two-unit vector (i.e. xlim=c(800, 200)) if you want to override the automatic determination of the size of the plot area.  You must provide both xlim and ylim for this take effect. Remember that for other than Bark difference normalized vowels, axes run from largest to smallest value - you must provide the values in the correct order. }
+  \item{ylim}{ Specify with a two-unit vector if you want to override the automatic determination of the size of the plot area.  You must provide both xlim and ylim for this take effect. Remember that for other than Bark difference normalized vowels, axes run from largest to smallest value - you must provide the values in the correct order. }
   \item{mean.points}{ For the add.spread.vowelplot() function only.  If TRUE, plot mean data points in addition to the standard deviation bars.  Default is FALSE.  The "shape" and "size" arguments are ignored if FALSE. }
   \item{sd.mult}{ For the add.spread.vowelplot() function only.  The multiplier for the range of standard deviations plotted by the bars.  Default is 2. }
+  \item{ellipsis}{ For the add.spread.vowelplot() function only.  Should this plot standard deviation bars or ellipses?  Default is FALSE. }
+
 }
 \details{
-  Primarily the vowelplot() function just provides helpful shortcuts for formatting vowel data frames for plotting in "standard" F2~F1 formats.  Cf. Thomas (2001) for a range of examples of vowel plots.  The add.vowelplot() function adds more vowel data to an existing plot.  It is helpful for adding, for example, mean values to a plot of individual vowels (see examples).
+  The vowelplot() function provides helpful shortcuts for formatting vowel data frames for plotting in "standard" F2~F1 formats.  Cf. Thomas (2001) for a range of examples of vowel plots.  The add.vowelplot() function adds more vowel data to an existing plot.  It is helpful for adding, for example, mean values to a plot of individual vowels (see examples).  The add.spread.vowelplot() function computes and adds standard deviation bars or ellipses to the vowel data.
   
-  The "setup" functions - setup.axes(), setup.point.color(), setup.point.shape(), and setup.sizes() - are called by vowelplot to determine settings for the plots.
+  The "setup" functions - setup.axes(), setup.point.color(), setup.point.shape(), and setup.sizes() - are called by vowelplot() to determine settings for the plots.
 }
 \value{ Nothing is returned. }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
 %\references{ Thomas, Erik R. 2001. \emph{An Acoustic Analysis of Vowel Variation in New World English}. Publication of the American Dialect Society 85. Durham, NC: Duke University Press. }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk3@duke.edu>\cr
+	with contributions from Santiago Barreda }
 \seealso{ \code{\link{load.vowels}}, \code{\link{compute.means}} }
 \examples{ 
 vowels <- load.vowels("http://ncslaap.lib.ncsu.edu/tools/norm/downloads/CentralOhioNORM.txt")
@@ -67,8 +75,8 @@ vowelplot(compute.means(vowels), shape="vowels")
 vowelplot(compute.means(norm.lobanov(vowels)), shape="vowels")
 
 par(mfrow=c(1,1))
-ohd.means <- compute.means(vowels, speaker="JOHG09")
-vowelplot(ohd.means, color="vowels", labels="none")
+g09.means <- compute.means(vowels, speaker="JOHG09")
+vowelplot(g09.means, color="vowels", labels="none")
 add.spread.vowelplot(vowels, speaker="JOHG09", sd.mult=1, color="vowels", labels="none")
 # can add annotations to the vowel plots as any other R graph, eg:
 legend("top", legend="Can you guess which vowel is 'BOY'?", col='lightslategrey', bty="n")
