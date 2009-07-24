@@ -1,5 +1,5 @@
 #####################
-# VOWELS v. 1.0-2
+# VOWELS v. 1.0-3
 # Vowel Manipulation, Normalization, and Plotting Package for R
 # Tyler Kendall, tsk3@duke.edu, 2009
 # cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/
@@ -810,6 +810,10 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
   
   if (ellipsis) {
    	t <- seq (0,7,.001)
+   	# if pl.c is simply "black" need to make it a long enough vec
+   	if (length(pl.c) < length(vmns[,5])) {
+   		pl.c<-rep(pl.c, length.out=length(vmns[,5]))
+   	}
    	for (v in 1:length(vmns[,5])) {
 		x <- vmns[v,5] + ((sd.mult*vsds[v,5])*cos(t))
 		y <- vmns[v,4] + ((sd.mult*vsds[v,4])*sin(t))
