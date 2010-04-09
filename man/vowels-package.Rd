@@ -10,8 +10,8 @@ vowels is an R package for the manipulation, normalization, and plotting of phon
 \tabular{ll}{
 Package: \tab vowels\cr
 Type: \tab Package\cr
-Version: \tab 1.0-3\cr
-Date: \tab 2009-07-24\cr
+Version: \tab 1.1\cr
+Date: \tab 2010-04-09\cr
 License: \tab GPL-3\cr
 URL: \tab http://ncslaap.lib.ncsu.edu/tools/norm/\cr
 }

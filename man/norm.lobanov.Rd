@@ -9,14 +9,14 @@ norm.lobanov(vowels, f1.all.mean=NA, f2.all.mean=NA)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{vowels}{ a required dataframe of the format: speaker\_id, vowel\_id, context, F1, F2, F3, F1\_glide, F2\_glide, F3\_glide.  The context column and glide columns must exist but can be empty. }
+  \item{vowels}{ a required dataframe of the format: speaker_id, vowel_id, context, F1, F2, F3, F1_glide, F2_glide, F3_glide.  The context column and glide columns must exist but can be empty. }
   \item{f1.all.mean}{ while it is not recommended that you supply values for f1.all.mean and f2.all.mean, doing so will override the speaker intrinsic generation of the mean formant values for the current speaker. }
   \item{f2.all.mean}{ see above. }
 }
 \details{
   Lobanov's method was one of the earlier vowel-extrinsic formulas to appear, but it remains among the best.  The implementation here follows Nearey (1977) and Adank et al. (2004).
 }
-\value{ A data frame in the format: speaker\_id, vowel\_id, F1', F2', F1'gl, F2'gl, with the attributes "no.f3s" == TRUE, "norm.method" == "Lobanov" }
+\value{ A data frame in the format: speaker_id, vowel_id, F1', F2', F1'gl, F2'gl, with the attributes "no.f3s" == TRUE, "norm.method" == "Lobanov" }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
 \references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
 

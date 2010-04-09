@@ -1,13 +1,14 @@
 #####################
-# VOWELS v. 1.0-3
+# VOWELS v. 1.1
 # Vowel Manipulation, Normalization, and Plotting Package for R
-# Tyler Kendall, tsk3@duke.edu, 2009
+# Tyler Kendall, tsk3@duke.edu, 2009-2010
 # cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/
 #####################
 
 #
 # USAGE: source("vowels.R")
-# --or-- R CMD install vowels_1.0.tar.gz (from command line)
+# --or-- R CMD install vowels_1.1.tar.gz (from command line)
+#  Then library(vowels)
 #  Then call functions as needed
 #
 #
@@ -20,7 +21,7 @@
 #   columns for F3 values, NA if there are F3 columns
 
 #
-# GENERIC FUNCTIONS
+# GENERAL FUNCTIONS
 #
 
 load.vowels <- function(file = NA, type='Hertz') {
@@ -33,7 +34,7 @@ load.vowels <- function(file = NA, type='Hertz') {
 label.columns <- function(vowels) {
 	col3 <- "Context"
 	vnames<-vector()
-	if (!is.null(attributes(vowels)$mean.values)) col3 <- "N"
+	if (!(is.null(attributes(vowels)$mean.values) | is.null(attributes(vowels)$mean.values))) col3 <- "N"
 	vnames<-c("Speaker", "Vowel", col3, "F1", "F2", "F3", "F1.gl", "F2.gl", "F3.gl")
 	if (!is.null(attributes(vowels)$no.f3s) | (dim(vowels)[2] < 9)){
 		vnames<-c("Speaker", "Vowel", col3, "F1", "F2", "F1.gl", "F2.gl")
@@ -197,6 +198,65 @@ compute.sds <- function(vowels, separate=FALSE, speaker=NA) {
 	return.vals
 }
 
+compute.medians <- function(vowels, separate=FALSE, speaker=NA) {
+
+	if (!separate & !is.na(speaker)) {
+		vals<-vowels[vowels[,1]==speaker,]
+	} else {
+		vals<-vowels
+	}
+	speakers<-unique(as.character(vals[,1]))
+	if (!separate & (length(speakers) > 1)) {
+		speakers<-c("AllSpkrs")
+	}
+	return.vals<-NA
+	no.f3s<-FALSE
+	if (!is.null(attributes(vowels)$no.f3s)) { no.f3s <- TRUE }
+	for (s in speakers) {
+		if (s == "AllSpkrs") {
+			use.vals<-vals
+		} else {
+			use.vals<-vals[vals[,1]==s,]
+		}
+		vowel.types<-unique(use.vals[,2])
+		spkrs<-vector(length=length(vowel.types))
+		n.cols<-(length(use.vals)-3)
+		if (n.cols > 6) n.cols <- 6
+		formants<-matrix(nrow=length(vowel.types), ncol=n.cols)
+		num.of.tokens<-vector(length=length(vowel.types))
+		for (i in 1:length(vowel.types)) {
+			spkrs[i]<-s
+			if (length(speakers)==1) { spkrs[i]<-speakers[1] 
+			} else if (!is.na(speaker)) { spkrs[i]<-speaker }
+			
+			for (j in 4:length(use.vals)) {
+				if (is.numeric(use.vals[,j])) {
+					formants[i,j-3]<-round(median(use.vals[use.vals[,2]==vowel.types[i], j], na.rm=TRUE), 3)
+				}
+			}
+
+			num.of.tokens[i]<-length(use.vals[,2][use.vals[,2]==vowel.types[i]])
+		}
+		if (is.data.frame(return.vals)) {
+			new.vals<-data.frame(spkrs, vowel.types, num.of.tokens, formants)
+			names(new.vals)<-c("Speaker", "Vowel", "N", names(vowels[,4:length(vowels)]))
+			if (dim(formants)[2]==4) no.f3s<-TRUE
+			return.vals<-rbind(return.vals, new.vals)
+		} else {
+			return.vals<-data.frame(spkrs, vowel.types, num.of.tokens, formants)
+			names(return.vals)<-c("Speaker", "Vowel", "N", names(vowels[,4:length(vowels)]))
+			if (dim(formants)[2]==4) no.f3s<-TRUE
+		}
+	}
+	if (no.f3s) { attr(return.vals, "no.f3s")<-TRUE }
+	attr(return.vals, "norm.method")<-attr(vowels, "norm.method")
+	attr(return.vals, "norm.variant")<-attr(vowels,"norm.variant")
+	attr(return.vals, "unit.type")<-attr(vowels,"unit.type")
+	attr(return.vals, "median.values")<-TRUE
+	#return.vals<-label.columns(return.vals)
+	return.vals
+}
+
 #
 # CONVERSION FUNCTIONS
 # Based on Traunmuller (1997)'s formula
@@ -215,6 +275,7 @@ convert.bark <- function(vowels) {
 	#names(return.vals)<-c("Speaker", "Vowel", "Context", "Z1", "Z2", "Z3", "Z1 gl", "Z2 gl", "Z3 gl")
 	attr(return.vals, "unit.type")<-"Bark"
 	attr(return.vals, "mean.values")<-attr(vowels,"mean.values")
+	attr(return.vals, "median.values")<-attr(vowels,"median.values")
 	return.vals<-label.columns(return.vals)
 	return.vals
 }
@@ -232,6 +293,7 @@ convert.erb <- function(vowels) {
 	#names(return.vals)<-c("Speaker", "Vowel", "Context", "E1", "E2", "E3", "E1 gl", "E2 gl", "E3 gl")
 	attr(return.vals, "unit.type")<-"ERB"
 	attr(return.vals, "mean.values")<-attr(vowels,"mean.values")
+	attr(return.vals, "median.values")<-attr(vowels,"median.values")
 	return.vals<-label.columns(return.vals)
 	return.vals
 }
@@ -652,7 +714,13 @@ vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape
 	nmethod<-paste(attributes(vowels)$norm.method, " ", sep="")
   }
   vtext<-"Individual"
-  if (!is.null(attributes(vowels)$mean.values)) vtext<-"Mean"
+  if (!is.null(attributes(vowels)$mean.values)) { 
+  	vtext<-"Mean"
+  } else if (!is.null(attributes(vowels)$median.values)) { 
+  	vtext<-"Median"
+  } else if (!is.null(attributes(vowels)$standard.devs)) { 
+  	vtext<-"Standard deviation of"
+  }
   mtext<-paste(vtext, " vowel formant values\n", nmethod, "normalized", sep="")
   
   if (!is.na(speaker)) {
@@ -701,11 +769,12 @@ vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape
   plot(vowels[,5], vowels[,4], xlim=c(axes[1],axes[2]), ylim=c(axes[3],axes[4]), xlab=names(vowels)[5], ylab=names(vowels)[4], pch=pl.p, cex=p.s, cex.main=(a.s + 0.5), cex.axis=(a.s + 0.25), cex.lab=(a.s+0.1), main=mtext, sub=stext, col=pl.c)
   pl.cs<-"black"
   pl.ps<-unique(pl.p)
-  if (!is.null(attributes(vowels)$mean.values)) pl.ps<-unique(pl.p)
+  if (!(is.null(attributes(vowels)$mean.values) | is.null(attributes(vowels)$median.values))) pl.ps<-unique(pl.p)
   
   if (!is.na(color) & color=="speakers") pl.cs<-unique(pl.c)
   if (!is.na(leg)) {
-  	if (leg == "vowels" & shape == "vowels") {
+  	if (leg == "vowels" & (shape == "vowels" | color == "vowels")) {
+  	  if (shape=="speakers") pl.ps<-NA
   	  if (!is.na(color) & color=="speakers") {
   	  	pl.lc<-"black"
   	  } else {
@@ -759,7 +828,7 @@ add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="
   points(vowels[,5], vowels[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
   pl.cs<-"black"
   pl.ps<-pl.p
-  if (!is.null(attributes(vowels)$mean.values)) pl.ps<-unique(pl.p)
+  if (!(is.null(attributes(vowels)$mean.values) | is.null(attributes(vowels)$median.values))) pl.ps<-unique(pl.p)
   if (shape=="vowels") pl.ps<-NA
   if (!is.na(color) & color=="speakers") pl.cs<-unique(pl.c)
   f3.plus <- 0
@@ -775,7 +844,7 @@ add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="
   options(warn=0)
 }
 
-add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, leg=FALSE, labels = "none") {
+add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, leg=FALSE, labels = "none", separate=TRUE) {
   if (!is.numeric(sd.mult)) { sd.mult<-as.numeric(sd.mult) }
 
   if (!is.na(speaker)) {
@@ -783,8 +852,8 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
   }
   spkrs<-as.character(unique(vowels[,1]))
   
-  vmns<-compute.means(vowels, separate=TRUE)
-  vsds<-compute.sds(vowels, separate=TRUE)
+  vmns<-compute.means(vowels, separate=separate)
+  vsds<-compute.sds(vowels, separate=separate)
   
   ltext<-NA
   if (!is.na(speaker) & (labels != "none")) {
@@ -808,8 +877,9 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
   a.s <- szs[2]
   l.s <- szs[3]
   
+  if (mean.points) points(vmns[,5], vmns[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
   if (ellipsis) {
-   	t <- seq (0,7,.001)
+   	t <- seq(0,7,0.1)
    	# if pl.c is simply "black" need to make it a long enough vec
    	if (length(pl.c) < length(vmns[,5])) {
    		pl.c<-rep(pl.c, length.out=length(vmns[,5]))
@@ -820,7 +890,6 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
 		lines(x, y, lty=2, col=pl.c[v])
 	}
   } else {
-	  if (mean.points) points(vmns[,5], vmns[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
   	arrows(vmns[,5]-(sd.mult*vsds[,5]), vmns[,4], vmns[,5]+(sd.mult*vsds[,5]), vmns[,4], length=0.1, angle=90, code=3, lty=2, col=pl.c)
  	arrows(vmns[,5], vmns[,4]-(sd.mult*vsds[,4]), vmns[,5], vmns[,4]+(sd.mult*vsds[,4]), length=0.1, angle=90, code=3, lty=2, col=pl.c)
   }

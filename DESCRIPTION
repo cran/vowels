@@ -1,8 +1,8 @@
 Package: vowels
 Type: Package
 Title: Vowel Manipulation, Normalization, and Plotting
-Version: 1.0-3
-Date: 2009-07-24
+Version: 1.1
+Date: 2010-04-09
 Author: Tyler Kendall and Erik R. Thomas
 Maintainer: Tyler Kendall <tsk3@duke.edu>
 Description: vowels is an R package for the manipulation,
@@ -11,6 +11,6 @@ Description: vowels is an R package for the manipulation,
 License: GPL-3
 URL: http://ncslaap.lib.ncsu.edu/tools/norm/
 LazyLoad: yes
-Packaged: Fri Jul 24 10:18:42 2009; tyler
+Packaged: 2012-10-29 08:59:59 UTC; ripley
 Repository: CRAN
-Date/Publication: 2009-07-30 19:30:34
+Date/Publication: 2012-10-29 08:59:59

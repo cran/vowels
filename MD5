@@ -1,0 +1,15 @@
+e62fe3d0d71e2380cb5cc95efcc14b1d *DESCRIPTION
+9fdfeb11f7ddba6f3aab9aaa6b1ac5dd *NAMESPACE
+e45757642547fb9d8531f4b5f6f13426 *R/vowels.R
+db2df3dbac91117970257e824b25b540 *man/compute.means.Rd
+53d9c574245f0d73656357d296538166 *man/convert.bark.Rd
+91b87d76d6c46ea4b3b873be97d7041f *man/label.columns.Rd
+fd639f20ee28a360df758b38b735473a *man/load.vowels.Rd
+913e5f5461bd0bb30a0c6aa18d74f2cb *man/norm.bark.Rd
+524a4298dd6014bed152f32e008c7463 *man/norm.labov.Rd
+cc136ab2b453ff549d0343cb8a2c6456 *man/norm.lobanov.Rd
+eaacc54383d122a2f9173c70b043378f *man/norm.nearey.Rd
+c467f73ca6e8ed6d62a315bc78935f3e *man/norm.wattfabricius.Rd
+9ffa8a9be36c1e309a611826c3727968 *man/scalevowels.Rd
+894b068fa96b12c14f9ca41c2b318fc5 *man/vowelplot.Rd
+3bfb040a6445c776ee80b4c65c55cbf8 *man/vowels-package.Rd

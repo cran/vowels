@@ -11,7 +11,7 @@ convert.bark(vowels)
 convert.erb(vowels)
 }
 \arguments{
-  \item{vowels}{ a required data frame of the format: speaker\_id, vowel\_id, context, F1, F2, F3, F1\_glide, F2\_glide, F3\_glide.  The context column and glide columns must exist but can be empty. }
+  \item{vowels}{ a required data frame of the format: speaker_id, vowel_id, context, F1, F2, F3, F1_glide, F2_glide, F3_glide.  The context column and glide columns must exist but can be empty. }
 }
 \details{
   Converts vowel data from acoustic - Hertz - values to auditory values, in Bark or ERB.
@@ -24,7 +24,7 @@ convert.erb(vowels)
   
   Ei = 11.17*log((Fi + 312)/(Fi + 14675))+43.0
 }
-\value{ A data frame in the format speaker\_id, vowel\_id, context, F1, F2, F3, F1\_glide, F2\_glide, F3\_glide, where F1, etc, are in Bark or ERB scales.  The data frame has the attribute "unit.type" of "Bark" or "ERB"}
+\value{ A data frame in the format speaker_id, vowel_id, context, F1, F2, F3, F1_glide, F2_glide, F3_glide, where F1, etc, are in Bark or ERB scales.  The data frame has the attribute "unit.type" of "Bark" or "ERB"}
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
 \references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
 

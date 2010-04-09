@@ -23,7 +23,7 @@ shape="speakers", shape.choice=NA, size=NA, labels="none")
 add.spread.vowelplot(vowels, mean.points=FALSE, sd.mult=2, 
 ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, 
 shape="speakers", shape.choice=NA, size = NA, leg=FALSE,
-labels="none")
+labels="none", separate=TRUE)
 
 setup.axes(vowels)
 setup.point.color(vowels, color=NA, color.choice=NA)
@@ -32,7 +32,7 @@ setup.sizes(vowels, size=NA, a.size=NA, l.size=NA)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{vowels}{ a required dataframe of the format: speaker\_id, vowel\_id, context/N, F1, F2, F3, F1\_glide, F2\_glide, F3\_glide.  The context/N column and the glide columns can be blank.}
+  \item{vowels}{ a required dataframe of the format: speaker_id, vowel_id, context/N, F1, F2, F3, F1_glide, F2_glide, F3_glide.  The context/N column and the glide columns can be blank.}
   \item{speaker}{ a character string specifying which speaker to plot.  If NA, the default, plots all speakers. }
   \item{color}{ Use color to differentiate "speakers" or "vowels".  If NA, the default, plots in black and white. }
   \item{color.choice}{ A vector of colors to use if not generating a black and white plot, in hex code or valid R color name (see color()).  If NA, the default, uses the default NORM colors.}
@@ -42,15 +42,15 @@ setup.sizes(vowels, size=NA, a.size=NA, l.size=NA)
   \item{a.size}{ The base size for annotation text and points (such as the plot title and axis labels).  If NA, is set to cex 1.0. }
   \item{l.size}{ The size for legend text and points.  If NA, is set to 75 percent of the a.size setting. }
   \item{labels}{ If "vowels", plots the vowel identifier along with the dots.  If "speakers", plots the speaker ids as labels along with the dots.  If labels is set to any other value, other than "none", the function includes both the speaker id and the vowel identifier as the labels.  If "none", the default, labels are suppressed.}
-  \item{leg}{ Include a legend in the vowel plot?  If so, for speakers or vowels?  If NA, do not generate a legend. Default is "speakers" for vowelplot().  For add.spread.vowelplot() this is a boolean, defaulting to FALSE, which shows the number of standard deviations depicted by the bars. }
+  \item{leg}{ Include a legend in the vowel plot?  If so, for speakers or vowels?  If NA, do not generate a legend. Default is "speakers" for vowelplot().  For add.spread.vowelplot() this is a boolean, defaulting to FALSE, which, if TRUE, shows the number of standard deviations depicted by the bars. }
   \item{title}{ Include a custom main title for the plot?  If blank (""), will generate a title based on the data submitted to the function. }
   \item{subtitle}{ Include a custom subtitle (smaller font title at the bottom) for the plot?  If NA, and the vowel data has attributes of "norm.variant" or "unit.type"!="Hertz", the subtitle will default to those values (in that order).  Set to blank (""), to have no subtitle, otherwise prints whatever user specifies. }
   \item{xlim}{ Specify with a two-unit vector (i.e. xlim=c(800, 200)) if you want to override the automatic determination of the size of the plot area.  You must provide both xlim and ylim for this take effect. Remember that for other than Bark difference normalized vowels, axes run from largest to smallest value - you must provide the values in the correct order. }
   \item{ylim}{ Specify with a two-unit vector if you want to override the automatic determination of the size of the plot area.  You must provide both xlim and ylim for this take effect. Remember that for other than Bark difference normalized vowels, axes run from largest to smallest value - you must provide the values in the correct order. }
   \item{mean.points}{ For the add.spread.vowelplot() function only.  If TRUE, plot mean data points in addition to the standard deviation bars.  Default is FALSE.  The "shape" and "size" arguments are ignored if FALSE. }
   \item{sd.mult}{ For the add.spread.vowelplot() function only.  The multiplier for the range of standard deviations plotted by the bars.  Default is 2. }
-  \item{ellipsis}{ For the add.spread.vowelplot() function only.  Should this plot standard deviation bars or ellipses?  Default is FALSE. }
-
+  \item{ellipsis}{ For the add.spread.vowelplot() function only.  Should this plot ellipses rather than standard deviation bars?  Default is FALSE. }
+  \item{separate}{ For the add.spread.vowelplot() function only. If FALSE, this generates bars/ellipses collapsed across all speakers in the data.  If TRUE, this generates separate bars/ellipses for each speaker.  The default is TRUE (note that this default is the opposite of the default action for the compute.means(), compute.sds(), and compute.medians() functions).}
 }
 \details{
   The vowelplot() function provides helpful shortcuts for formatting vowel data frames for plotting in "standard" F2~F1 formats.  Cf. Thomas (2001) for a range of examples of vowel plots.  The add.vowelplot() function adds more vowel data to an existing plot.  It is helpful for adding, for example, mean values to a plot of individual vowels (see examples).  The add.spread.vowelplot() function computes and adds standard deviation bars or ellipses to the vowel data.
