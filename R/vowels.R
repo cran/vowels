@@ -1,13 +1,13 @@
 #####################
-# VOWELS v. 1.1
+# VOWELS v. 1.2
 # Vowel Manipulation, Normalization, and Plotting Package for R
-# Tyler Kendall, tsk3@duke.edu, 2009-2010
+# Tyler Kendall, tsk@uoregon.edu, 2009-2012
 # cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/
 #####################
 
 #
 # USAGE: source("vowels.R")
-# --or-- R CMD install vowels_1.1.tar.gz (from command line)
+# --or-- R CMD install vowels_1.2.tar.gz (from command line)
 #  Then library(vowels)
 #  Then call functions as needed
 #
@@ -878,7 +878,7 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
   l.s <- szs[3]
   
   if (mean.points) points(vmns[,5], vmns[,4], pch=pl.p, cex=p.s, cex.lab=(a.s+0.1), main=mtext, col=pl.c)
-  if (ellipsis) {
+  if (ellipsis=="horizvert") {
    	t <- seq(0,7,0.1)
    	# if pl.c is simply "black" need to make it a long enough vec
    	if (length(pl.c) < length(vmns[,5])) {
@@ -888,6 +888,60 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
 		x <- vmns[v,5] + ((sd.mult*vsds[v,5])*cos(t))
 		y <- vmns[v,4] + ((sd.mult*vsds[v,4])*sin(t))
 		lines(x, y, lty=2, col=pl.c[v])
+	}
+  } else if (ellipsis) {
+   	t <- seq(0,7,0.1)
+  	if (length(pl.c) < length(vmns[,5])) {
+   		pl.c<-rep(pl.c, length.out=length(vmns[,5]))
+   	}
+   	if (separate==TRUE) {
+   		for (sp in unique(vmns[,1])) {
+   			for (v in as.character(vmns[,2])) {
+   				svmns <- vmns[vmns[,1]==sp & vmns[,2]==v,]
+   				svsds <- vsds[vsds[,1]==sp & vsds[,2]==v,]
+   				svwls <- vowels[vowels[,1]==sp & vowels[,2]==v,]
+   				spl.c <- pl.c[vmns[,1]==sp & vmns[,2]==v]
+	 			if (nrow(svwls) > 1) {
+	   				# Find the principal components and standard devs of the distribution
+ 		 			prcs <- prcomp(cbind(svwls[,5],svwls[,4]))
+	 	 			if (prcs$sdev[1] >= prcs$sdev[2]) {
+    					xscale <- prcs$sdev[1] * sd.mult
+   					 	yscale <- prcs$sdev[2] * sd.mult
+    					column <- 1
+  					} else {
+   			 			xscale <- prcs$sdev[2] * sd.mult  
+    					yscale <- prcs$sdev[1] * sd.mult 
+    					column <- 2
+  					}
+					x <- xscale*cos(t)
+					y <- yscale*sin(t)
+					rotatedx <- svmns[,5] + x*prcs$rotation[1,column] - y*prcs$rotation[2,column]
+					rotatedy <- svmns[,4] + x*prcs$rotation[2,column] + y*prcs$rotation[1,column]
+					lines(rotatedx, rotatedy, lty=2, col=spl.c)
+				}
+			}
+		}
+	} else {
+		for (v in as.character(vmns[,2])) {
+			if (!is.na(vsds[vsds[,2]==v,5])) {
+	   			# Find the principal components and standard devs of the distribution
+ 		 		prcs <- prcomp(cbind(vowels[vowels[,2]==v,5],vowels[vowels[,2]==v,4]))
+	 	 		if (prcs$sdev[1] >= prcs$sdev[2]) {
+    				xscale <- prcs$sdev[1] * sd.mult
+   			 		yscale <- prcs$sdev[2] * sd.mult
+    				column <- 1
+  				} else {
+    				xscale <- prcs$sdev[2] * sd.mult  
+    				yscale <- prcs$sdev[1] * sd.mult 
+    				column <- 2
+  				}
+				x <- xscale*cos(t)
+				y <- yscale*sin(t)
+				rotatedx <- vmns[vmns[,2]==v,5] + x*prcs$rotation[1,column] - y*prcs$rotation[2,column]
+				rotatedy <- vmns[vmns[,2]==v,4] + x*prcs$rotation[2,column] + y*prcs$rotation[1,column]
+				lines(rotatedx, rotatedy, lty=2, col=pl.c[which(vmns[,2]==v)])
+			}
+		}
 	}
   } else {
   	arrows(vmns[,5]-(sd.mult*vsds[,5]), vmns[,4], vmns[,5]+(sd.mult*vsds[,5]), vmns[,4], length=0.1, angle=90, code=3, lty=2, col=pl.c)

@@ -10,8 +10,8 @@ vowels is an R package for the manipulation, normalization, and plotting of phon
 \tabular{ll}{
 Package: \tab vowels\cr
 Type: \tab Package\cr
-Version: \tab 1.1\cr
-Date: \tab 2010-04-09\cr
+Version: \tab 1.2\cr
+Date: \tab 2012-11-05\cr
 License: \tab GPL-3\cr
 URL: \tab http://ncslaap.lib.ncsu.edu/tools/norm/\cr
 }
@@ -22,10 +22,14 @@ This package is the backend for the NORM website - http://ncslaap.lib.ncsu.edu/t
 \author{
 Kendall, Tyler and Erik R. Thomas 2009
 
-Maintainer: Kendall, Tyler <tsk3@duke.edu>
+Maintainer: Kendall, Tyler <tsk@uoregon.edu>
 }
 \references{
 Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+
+Watt, Dominic, Anne Fabricius, and Tyler Kendall. 2011. More on Vowels: Plotting and Normalization.  In M. Yaeger-Dror and M. Di Paolo (eds.), Sociophonetics: A Student's Guide, 107-118. New York: Routledge.
+
+Fabricius, Anne, Dominic Watt, and Daniel Ezra Johnson. 2009. A comparison of three speaker-intrinsic vowel formant frequency normalization algorithms for sociophonetics. Language Variation and Change 21:413-35.
 
 Adank, Patti, Smits, Roel, and van Hout, Roeland. 2004. A comparison of vowel normalization procedures for language variation research. \emph{Journal of the Acoustical Society of America} 116:3099-107.
 

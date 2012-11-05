@@ -49,7 +49,7 @@ setup.sizes(vowels, size=NA, a.size=NA, l.size=NA)
   \item{ylim}{ Specify with a two-unit vector if you want to override the automatic determination of the size of the plot area.  You must provide both xlim and ylim for this take effect. Remember that for other than Bark difference normalized vowels, axes run from largest to smallest value - you must provide the values in the correct order. }
   \item{mean.points}{ For the add.spread.vowelplot() function only.  If TRUE, plot mean data points in addition to the standard deviation bars.  Default is FALSE.  The "shape" and "size" arguments are ignored if FALSE. }
   \item{sd.mult}{ For the add.spread.vowelplot() function only.  The multiplier for the range of standard deviations plotted by the bars.  Default is 2. }
-  \item{ellipsis}{ For the add.spread.vowelplot() function only.  Should this plot ellipses rather than standard deviation bars?  Default is FALSE. }
+  \item{ellipsis}{ For the add.spread.vowelplot() function only.  Should this plot ellipses rather than standard deviation bars?  Default is FALSE. Set to TRUE for ellipsis.  As of Vowels 1.2 this makes 'true' ellipsis around the dimensions of variation.  For the original version, which plotted horizontal-vertical ellipses only, set to "horizvert". }
   \item{separate}{ For the add.spread.vowelplot() function only. If FALSE, this generates bars/ellipses collapsed across all speakers in the data.  If TRUE, this generates separate bars/ellipses for each speaker.  The default is TRUE (note that this default is the opposite of the default action for the compute.means(), compute.sds(), and compute.medians() functions).}
 }
 \details{

@@ -19,9 +19,9 @@ norm.wattfabricius(vowels, norm.means=FALSE, mod.WF=FALSE)
   See Thomas and Kendall (2007) for a fuller description of the implementation here.
 }
 \value{ A data frame in one of two formats:
-	If norm.means == TRUE: a data frame with speaker_id, vowel_id,  vowel_N, F1/S(F1), F2/S(F2), F1g/S(F1g), F2g/S(F2g) with the attribute "mean.values" == TRUE
-	If norm.means == FALSE: a data frame with speaker_id, vowel_id, F1/S(F1), F2/S(F2), F1g/S(F1g), F2g/S(F2g).
-	In both cases, the data frame also has the attribute "norm.method" == "Watt & Fabricius"}
+	If norm.means == TRUE: a data frame with speaker_id, vowel_id,  vowel_N, F1/S(F1), F2/S(F2), F1g/S(F1g), F2g/S(F2g) with the attribute "mean.values" == TRUE.
+	If norm.means == FALSE: a data frame with speaker_id, vowel_id, context, F1/S(F1), F2/S(F2), F1g/S(F1g), F2g/S(F2g).
+	In both cases, the data frame also has the attributes "norm.method" == "Watt & Fabricius" and "no.f3s" == TRUE.  When sing mod.WF=TRUE, the result also has the attribute "norm.variant" == "ModWF".}
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future versions.}
 \references{ Fabricius, Anne, Dominic Watt, and Daniel Ezra Johnson. 2009. A comparison of three speaker-intrinsic vowel formant frequency normalization algorithms for sociophonetics. Language Variation and Change 21:413-35.
 
