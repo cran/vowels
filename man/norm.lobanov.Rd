@@ -26,7 +26,7 @@ Lobanov, B. M. 1971. Classification of Russian vowels spoken by different listen
 
 Nearey, Terrance M. 1977. Phonetic Feature Systems for Vowels. Dissertation, University of Alberta. Reprinted 1978 by the Indiana University Linguistics Club.
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.bark}}, \code{\link{norm.labov}}, \code{\link{norm.nearey}}, \code{\link{norm.wattfabricius}} }
 %\examples{ }
 \keyword{ methods }

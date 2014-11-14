@@ -17,9 +17,6 @@ A simple wrapper for reading a tab-delimited text file into a data frame.
 }
 \value{ A data frame containing the vowel data from the input file }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{file.choose}}, \code{\link{read.table}} }
-\examples{ 
-vowels <- load.vowels("http://ncslaap.lib.ncsu.edu/tools/norm/downloads/CentralOhioNORM.txt")
-}
 \keyword{ IO }

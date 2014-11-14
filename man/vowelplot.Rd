@@ -60,31 +60,38 @@ setup.sizes(vowels, size=NA, a.size=NA, l.size=NA)
 \value{ Nothing is returned. }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
 %\references{ Thomas, Erik R. 2001. \emph{An Acoustic Analysis of Vowel Variation in New World English}. Publication of the American Dialect Society 85. Durham, NC: Duke University Press. }
-\author{ Kendall, Tyler <tsk3@duke.edu>\cr
+\author{ Kendall, Tyler <tsk@uoregon.edu>\cr
 	with contributions from Santiago Barreda }
 \seealso{ \code{\link{load.vowels}}, \code{\link{compute.means}} }
 \examples{ 
-vowels <- load.vowels("http://ncslaap.lib.ncsu.edu/tools/norm/downloads/CentralOhioNORM.txt")
-vowelplot(vowels, color="vowels", label="vowels")
+data(ohiovowels)
+vowelplot(ohiovowels, color="vowels", label="vowels")
 
-vowelplot(norm.bark(vowels), speaker="JOHG09", color="vowels", color.choice=rainbow(length(unique(vowels[,2]))), label="none", title="JOHG09 Bark Difference Normalized Vowels")
-add.spread.vowelplot(norm.bark(vowels), speaker="JOHG09", sd.mult=1, color.choice=rainbow(length(unique(vowels[,2]))), color="vowels", leg=TRUE)
+vowelplot(norm.bark(ohiovowels), speaker="JOHG09", color="vowels",
+ color.choice=rainbow(length(unique(ohiovowels[,2]))), label="none", 
+title="JOHG09 Bark Difference Normalized Vowels")
+add.spread.vowelplot(norm.bark(ohiovowels), speaker="JOHG09", sd.mult=1,
+ color.choice=rainbow(length(unique(ohiovowels[,2]))), color="vowels", leg=TRUE)
 
 par(mfrow=c(2,1))
-vowelplot(compute.means(vowels), shape="vowels")
-vowelplot(compute.means(norm.lobanov(vowels)), shape="vowels")
+vowelplot(compute.means(ohiovowels), shape="vowels")
+vowelplot(compute.means(norm.lobanov(ohiovowels)), shape="vowels")
 
 par(mfrow=c(1,1))
-g09.means <- compute.means(vowels, speaker="JOHG09")
+g09.means <- compute.means(ohiovowels, speaker="JOHG09")
 vowelplot(g09.means, color="vowels", labels="none")
-add.spread.vowelplot(vowels, speaker="JOHG09", sd.mult=1, color="vowels", labels="none")
+add.spread.vowelplot(ohiovowels, speaker="JOHG09", sd.mult=1, color="vowels", labels="none")
 # can add annotations to the vowel plots as any other R graph, eg:
 legend("top", legend="Can you guess which vowel is 'BOY'?", col='lightslategrey', bty="n")
 
-vowelplot(norm.nearey(vowels), speaker="JOHG09", color="speakers", labels="vowels", title="Individual vowels and means for JOHG09\nNearey1 Normalized")
-add.vowelplot(compute.means(norm.nearey(vowels), speaker="JOHG09"), color=NA, size=2, labels="vowels")
+vowelplot(norm.nearey(ohiovowels), speaker="JOHG09", color="speakers", labels="vowels",
+ title="Individual vowels and means for JOHG09\nNearey1 Normalized")
+add.vowelplot(compute.means(norm.nearey(ohiovowels), speaker="JOHG09"), color=NA, size=2,
+ labels="vowels")
 
-vowelplot(norm.wattfabricius(vowels), speaker="JOHG09", shape="vowels", color="vowels", color.choice=sample(colors(), length(unique(vowels[,2]))), leg="vowels", title="Randomly colored vowels for JOHG09\nWatt & Fabricious normalized")
+vowelplot(norm.wattfabricius(ohiovowels), speaker="JOHG09", shape="vowels", color="vowels",
+ color.choice=sample(colors(), length(unique(ohiovowels[,2]))), leg="vowels",
+ title="Randomly colored vowels for JOHG09\nWatt & Fabricious normalized")
 }
 
 \keyword{ hplot }

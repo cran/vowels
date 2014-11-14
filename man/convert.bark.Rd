@@ -30,7 +30,7 @@ convert.erb(vowels)
 
 Traunmuller, Hartmut. 1997. Auditory scales of frequency representation. [ Online: http://www.ling.su.se/staff/hartmut/bark.htm ] 
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.bark}} }
 %\examples{ }
 \keyword{ methods }

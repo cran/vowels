@@ -30,15 +30,15 @@ The compute.medians() and compute.sds() functions have the same return values ex
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
 \references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.lobanov}}, \code{\link{norm.wattfabricius}}, \code{\link{vowelplot}} \code{\link{add.spread.vowelplot}} }
 \examples{ 
-vowels <- load.vowels("http://ncslaap.lib.ncsu.edu/tools/norm/downloads/CentralOhioNORM.txt")
-means <- compute.means(vowels)
+data(ohiovowels)
+means <- compute.means(ohiovowels)
 vowelplot(means, color="vowels", labels="vowels")
 
-ohd.means <- compute.means(vowels, speaker="OHDMTV_M")
+ohd.means <- compute.means(ohiovowels, speaker="OHDMTV_M")
 vowelplot(ohd.means, color="vowels", labels="none")
-add.spread.vowelplot(vowels, speaker="OHDMTV_M", color="vowels", sd.mult=1)
+add.spread.vowelplot(ohiovowels, speaker="OHDMTV_M", color="vowels", sd.mult=1)
 }
 \keyword{ methods }

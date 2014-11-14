@@ -1,13 +1,14 @@
 #####################
-# VOWELS v. 1.2
+# VOWELS v. 1.2-1
 # Vowel Manipulation, Normalization, and Plotting Package for R
-# Tyler Kendall, tsk@uoregon.edu, 2009-2012
-# cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/
+# Tyler Kendall, tsk@uoregon.edu, 2009-2014
+# cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/ & http://lvc.uoregon.edu/norm/
+#     Info: http://blogs.uoregon.edu/vowels/
 #####################
 
 #
 # USAGE: source("vowels.R")
-# --or-- R CMD install vowels_1.2.tar.gz (from command line)
+# --or-- R CMD install vowels_1.2-1.tar.gz (from command line)
 #  Then library(vowels)
 #  Then call functions as needed
 #

@@ -1,5 +1,4 @@
-# Default NAMESPACE created by R
-# Remove the previous line if you edit this file
+# NAMESPACE file for vowels_1.2-1
 
 # Export all names
 exportPattern(".")

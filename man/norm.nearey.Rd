@@ -34,7 +34,7 @@ Adank, Patti, Smits, Roel, and van Hout, Roeland. 2004. A comparison of vowel no
 Labov, William, Ash, Sharon, and Boberg, Charles. 2006. The Atlas of North American English: Phonology, Phonetics, and Sound Change. A Multimedia Reference Tool. Berlin: Mouton de Gruyter.
 Lobanov, B. M. 1971. Classification of Russian vowels spoken by different listeners. Journal of the Acoustical Society of America 49:606-08. 
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.bark}}, \code{\link{norm.labov}}, \code{\link{norm.lobanov}}, \code{\link{norm.wattfabricius}} }
 %\examples{ }
 \keyword{ methods }

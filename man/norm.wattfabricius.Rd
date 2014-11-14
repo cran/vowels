@@ -29,7 +29,7 @@ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plott
 
 Watt, Dominic and Fabricius, Anne. 2002. Evaluation of a technique for improving the mapping of multiple speakers' vowel spaces in the F1 ~ F2 plane. In D. Nelson, Leeds Working Papers in Linguistics and Phonetics 9:159-73.
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.bark}}, \code{\link{norm.labov}}, \code{\link{norm.lobanov}}, \code{\link{norm.nearey}} }
 %\examples{ }
 \keyword{ methods }

@@ -16,7 +16,7 @@ Scaling is necessary to convert the output from some normalization methods to va
 }
 \value{ The original data frame with the normalized values scaled. }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.lobanov}}, \code{\link{norm.nearey}}, \code{\link{norm.wattfabricius}} }
 %\examples{ }
 \keyword{ IO }

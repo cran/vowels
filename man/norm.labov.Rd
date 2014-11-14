@@ -28,7 +28,7 @@ norm.labov(vowels, G.value=NA, use.f3=FALSE, geomean=TRUE)
 
 Labov, William, Sharon Ash, and Charles Boberg. 2006. \emph{The Atlas of North American English: Phonology, Phonetics, and Sound Change. A Multimedia Reference Tool}. Berlin: Mouton de Gruyter.
 }
-\author{ Kendall, Tyler <tsk3@duke.edu> }
+\author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.bark}}, \code{\link{norm.lobanov}}, \code{\link{norm.nearey}}, \code{\link{norm.wattfabricius}} }
 %\examples{ }
 \keyword{ methods }
