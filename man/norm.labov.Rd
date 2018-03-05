@@ -24,7 +24,7 @@ norm.labov(vowels, G.value=NA, use.f3=FALSE, geomean=TRUE)
 	If use.f3 is FALSE: speaker_id, vowel_id, F1', F2', F1'gl, F2'gl, with the attribute "no.f3s" == TRUE
 	In both cases, the data frame also has the attributes "norm.method" == "Labov" and "G.value", which equals the used G.value.  When G.value == 6.896874, there is the additional attribute of "norm.variant" == "Labov, w/ Telsur G" }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 
 Labov, William, Sharon Ash, and Charles Boberg. 2006. \emph{The Atlas of North American English: Phonology, Phonetics, and Sound Change. A Multimedia Reference Tool}. Berlin: Mouton de Gruyter.
 }

@@ -26,7 +26,7 @@ convert.erb(vowels)
 }
 \value{ A data frame in the format speaker_id, vowel_id, context, F1, F2, F3, F1_glide, F2_glide, F3_glide, where F1, etc, are in Bark or ERB scales.  The data frame has the attribute "unit.type" of "Bark" or "ERB"}
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 
 Traunmuller, Hartmut. 1997. Auditory scales of frequency representation. [ Online: http://www.ling.su.se/staff/hartmut/bark.htm ] 
 }

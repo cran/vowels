@@ -25,7 +25,7 @@ norm.wattfabricius(vowels, norm.means=FALSE, mod.WF=FALSE)
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future versions.}
 \references{ Fabricius, Anne, Dominic Watt, and Daniel Ezra Johnson. 2009. A comparison of three speaker-intrinsic vowel formant frequency normalization algorithms for sociophonetics. Language Variation and Change 21:413-35.
 
-Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 
 Watt, Dominic and Fabricius, Anne. 2002. Evaluation of a technique for improving the mapping of multiple speakers' vowel spaces in the F1 ~ F2 plane. In D. Nelson, Leeds Working Papers in Linguistics and Phonetics 9:159-73.
 }

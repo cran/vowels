@@ -28,7 +28,7 @@ compute.sds(vowels, separate=FALSE, speaker=NA)
 	
 The compute.medians() and compute.sds() functions have the same return values except instead of the attribute "mean.values", they have the attribute "median.values" or "standard.devs" respectively}
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 }
 \author{ Kendall, Tyler <tsk@uoregon.edu> }
 \seealso{ \code{\link{norm.lobanov}}, \code{\link{norm.wattfabricius}}, \code{\link{vowelplot}} \code{\link{add.spread.vowelplot}} }

@@ -1,14 +1,14 @@
 #####################
-# VOWELS v. 1.2-1
+# VOWELS v. 1.2-2
 # Vowel Manipulation, Normalization, and Plotting Package for R
-# Tyler Kendall, tsk@uoregon.edu, 2009-2014
-# cf. NORM: http://ncslaap.lib.ncsu.edu/tools/norm/ & http://lvc.uoregon.edu/norm/
+# Tyler Kendall, tsk@uoregon.edu, 2009-2018
+# cf. NORM: http://lingtools.uoregon.edu/norm/
 #     Info: http://blogs.uoregon.edu/vowels/
 #####################
 
 #
 # USAGE: source("vowels.R")
-# --or-- R CMD install vowels_1.2-1.tar.gz (from command line)
+# --or-- R CMD install vowels_1.2-2.tar.gz (from command line)
 #  Then library(vowels)
 #  Then call functions as needed
 #
@@ -627,11 +627,9 @@ setup.point.color <- function(vowels, color = NA,color.choice=NA){
 		ind.types <- unique(vowels[,ind])
 	
 		clrs<-default.point.colors()
-		options(warn=-1) # suppressing warnings here 
-		if (!is.na(color.choice)) {
+		if (!any(is.na(color.choice))) {
 			clrs<-color.choice
 		}
-		options(warn=0)
 		clrs<-rep(clrs, len=length(ind.types))
 		for (i in 1:length(ind.types)) {
 			pl.c[vowels[,ind]==ind.types[i]]<-clrs[i]
@@ -794,10 +792,10 @@ vowelplot <- function(vowels, speaker = NA, color = NA, color.choice = NA, shape
   options(warn=-1) # suppressing warnings here 
   # (arrows create a warning when they're too short to print)
   arrows(vowels[,5], vowels[,4], vowels[,7+f3.plus], vowels[,6+f3.plus], angle=15, length=0.1, lwd=(p.s+0.3), col=pl.c)
-  if (!is.na(ltext)) {
+  options(warn=0)
+  if (!all(is.na(ltext))) {
 	text(vowels[,5], vowels[,4], ltext, adj=c(0,1.5), cex=(2*p.s/3), col=pl.c)
   }
-  options(warn=0)
 }
 
 add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, labels = "none") {
@@ -839,10 +837,10 @@ add.vowelplot <- function(vowels, speaker=NA, color=NA, color.choice=NA, shape="
   options(warn=-1) # suppressing warnings here 
   # (arrows create a warning when they're too short to print)
   arrows(vowels[,5], vowels[,4], vowels[,7+f3.plus], vowels[,6+f3.plus], angle=15, length=0.1, lwd=(p.s+0.3), col=pl.c)
-  if (!is.na(ltext)) {
+  options(warn=0)
+  if (!all(is.na(ltext))) {
 	text(vowels[,5], vowels[,4], ltext, adj=c(0,1.5), cex=(2*p.s/3), col=pl.c)
   }
-  options(warn=0)
 }
 
 add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=FALSE, speaker=NA, color=NA, color.choice=NA, shape="speakers", shape.choice = NA, size = NA, leg=FALSE, labels = "none", separate=TRUE) {
@@ -949,9 +947,7 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
  	arrows(vmns[,5], vmns[,4]-(sd.mult*vsds[,4]), vmns[,5], vmns[,4]+(sd.mult*vsds[,4]), length=0.1, angle=90, code=3, lty=2, col=pl.c)
   }
   if (leg) legend("bottomright", legend=paste(sd.mult, " SDs", sep=""), lty=2, cex=0.8, inset=.02)
-  options(warn=-1) # suppressing warnings here 
-  if (!is.na(ltext)) {
+  if (!all(is.na(ltext))) {
 	text(vmns[,5], vmns[,4], ltext, adj=c(0,1.5), cex=(2*p.s/3), col=pl.c)
   }
-  options(warn=0)
-}
+ }

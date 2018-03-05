@@ -20,7 +20,7 @@ norm.bark(vowels)
 }
 \value{ A data frame in the format speaker_id, vowel_id, context, Z3-Z1, Z3-Z2, Z2-Z1, Z3-Z1_gl, Z3-Z2_gl, Z2-Z1_gl with the attribute "norm.method" == "Bark Difference"}
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 
 Traunmuller, Hartmut. 1997. Auditory scales of frequency representation. [ Online: http://www.ling.su.se/staff/hartmut/bark.htm ] 
 }

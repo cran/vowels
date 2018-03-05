@@ -25,7 +25,7 @@ all.mean=NA, all.mean.f2=NA, all.mean.f3=NA)
 	If use.f3 is FALSE: speaker_id, vowel_id, F*1, F*2, F*1gl, F*2gl, with the attribute "no.f3s" == TRUE
 	In both cases, the data frame also has the attributes "norm.method" == "Nearey" and "norm.variant" == "Nearey1" or "Nearey2", depending on whether formant.int is FALSE or TRUE }
 \section{Warning }{The development of the library and this function are ongoing.  The arguments to the function may change in future version.}
-\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://ncslaap.lib.ncsu.edu/tools/norm/ ]
+\references{ Thomas, Erik R. and Tyler Kendall. 2007. NORM: The vowel normalization and plotting suite. [ Online Resource: http://lingtools.uoregon.edu/norm/ ]
 
 Nearey, Terrance M. 1977. Phonetic Feature Systems for Vowels. Dissertation, University of Alberta. Reprinted 1978 by the Indiana University Linguistics Club.
 
