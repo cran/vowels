@@ -45,7 +45,7 @@ Nearey, Terrance M. 1977. \emph{Phonetic Feature Systems for Vowels}. Dissertati
 
 \examples{
 # You can use load.vowels(), e.g. below, to load vowel data from a URL or a local file
-# ohiovowels <- load.vowels("http://lingtools.uoregon.edu/downloads/CentralOhioNORM.txt")
+# ohiovowels <- load.vowels("http://lingtools.uoregon.edu/norm/downloads/CentralOhioNORM.txt")
 
 # ohiovowels is "CentralOhioNORM.txt" file from NORM website, included in the package for examples
 data(ohiovowels)
