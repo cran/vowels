@@ -5,5 +5,5 @@ exportPattern(".")
 
 # Import names
 importFrom("graphics", "arrows", "legend", "lines", "mtext", "plot", "points", "text")
-importFrom("stats", "median", "prcomp", "sd")
+importFrom("stats", "median", "prcomp", "sd", "dist")
 importFrom("utils", "read.table")
