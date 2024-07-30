@@ -951,3 +951,69 @@ add.spread.vowelplot <- function(vowels, mean.points=FALSE, sd.mult=2, ellipsis=
 	text(vmns[,5], vmns[,4], ltext, adj=c(0,1.5), cex=(2*p.s/3), col=pl.c)
   }
  }
+
+
+#
+# VOWEL CLUSTERING METRICS
+# 
+
+compute.stdists <- function(vowels, use.f3 = FALSE) {
+  # Extract unique vowel frames from the dataframe
+  vowel_frames <- unique(vowels[, 2])
+  # Initialize a list to store results and sample counts
+  results <- list()
+  sample_counts <- list()
+  # Loop through each vowel frame and compute the standard distance
+  for (vowel_frame in vowel_frames) {
+    if (use.f3) {
+      vowel_subset <- vowels[vowels[2] == vowel_frame, 1:6]
+      vectors <- list(vowel_subset[, 4], vowel_subset[, 5], vowel_subset[, 6])
+    } else {
+      vowel_subset <- vowels[vowels[2] == vowel_frame, 1:5]
+      vectors <- list(vowel_subset[, 4], vowel_subset[, 5])
+    }
+    n <- length(vectors)
+    # Calculate the centroid for each dimension
+    centroids <- sapply(vectors, mean)
+    # Calculate the differences from the centroids for each dimension
+    differences <- lapply(seq_len(n), function(i) vectors[[i]] - centroids[i])
+    # Calculate the sum of squares of the differences for each dimension
+    sum_of_squares <- sum(sapply(differences, function(x) sum(x^2)))
+    # Calculate the variance
+    total_elements <- sum(sapply(vectors, length))
+    variance <- sum_of_squares / total_elements
+    # Calculate the mean Euclidean distance
+    mean_euclidean_distance <- sqrt(variance)
+    # Store the result and sample count
+    results[[vowel_frame]] <- mean_euclidean_distance
+    sample_counts[[vowel_frame]] <- nrow(vowel_subset)
+  }
+  # Convert the results and sample counts to a dataframe
+  results_df <- data.frame(
+    Vowel = names(results),
+    N = unlist(sample_counts),
+    Standard.Distance = unlist(results),
+    row.names = NULL
+  )
+  return(results_df)
+}
+
+compute.bwr <- function(vowels, use.f3 = FALSE) {
+  if (use.f3) {
+    data_matrix <- as.matrix(vowels[, 4:6])
+  } else {
+    data_matrix <- as.matrix(vowels[, 4:5])
+  }
+  category_labels <- vowels[, 2]
+  # Compute pairwise distances using a distance matrix
+  dist_matrix <- as.matrix(dist(data_matrix))
+  # Create logical matrices for within-category and between-category distances
+  category_matrix <- outer(category_labels, category_labels, "==")
+  within_category_distances <- dist_matrix[category_matrix & lower.tri(dist_matrix)]
+  between_category_distances <- dist_matrix[!category_matrix & lower.tri(dist_matrix)]
+  # Compute mean bcd and mean wcd
+  mean_between <- mean(between_category_distances)
+  mean_within <- mean(within_category_distances)
+  # Return bwr
+  return(mean_between / mean_within)
+}
